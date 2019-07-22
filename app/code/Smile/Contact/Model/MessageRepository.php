@@ -37,7 +37,7 @@ class MessageRepository implements \Smile\Contact\Api\MessageRepositoryInterface
     public function __construct(
         \Smile\Contact\Model\Resource\Message $resource,
         \Smile\Contact\Model\MessageFactory $messageFactory,
-        \Smile\Contact\Api\Data\NoticeInterfaceFactory $dataMessageFactory,
+        \Smile\Contact\Api\Data\MessageInterfaceFactory $dataMessageFactory,
         \Smile\Contact\Model\Resource\Message\CollectionFactory $messageCollectionFactory,
         \Smile\Contact\Api\Data\MessageSearchResultsInterfaceFactory $searchResultsFactory,
         \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
@@ -70,7 +70,7 @@ class MessageRepository implements \Smile\Contact\Api\MessageRepositoryInterface
 
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
     {
-        /** @var \Bfm\Notifications\Model\Resource\Notice\Collection $collection */
+        /** @var \Smile\Contact\Model\Resource\Message\Collection $collection */
         $collection = $this->messageCollectionFactory->create();
         $this->collectionProcessor->process($searchCriteria, $collection);
         $searchResults = $this->searchResultsFactory->create();

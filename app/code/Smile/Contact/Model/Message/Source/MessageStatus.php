@@ -1,5 +1,5 @@
 <?php
-namespace Smile\Contact\Model\Notice\Source;
+namespace Smile\Contact\Model\Message\Source;
 
 class MessageStatus implements \Magento\Framework\Data\OptionSourceInterface
 {
