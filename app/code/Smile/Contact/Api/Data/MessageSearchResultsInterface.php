@@ -4,16 +4,18 @@ namespace Smile\Contact\Api\Data;
 interface MessageSearchResultsInterface extends \Magento\Framework\Api\SearchResultsInterface
 {
     /**
-     * -     * Get notice list.
+     * -     * Get message list.
      * -     *
+     * @api
      * -     * @return \Smile\Contact\Api\Data\MessageInterface[]
      * -     */
 
     public function getItems();
 
     /**
-     * -     * Set notice list.
+     * -     * Set message list.
      * -     *
+     * @api
      * -     * @param \Smile\Contact\Api\Data\MessageInterface[] $items
      * -     *
      * -     * @return $this

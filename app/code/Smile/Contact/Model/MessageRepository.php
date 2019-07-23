@@ -29,25 +29,18 @@ class MessageRepository implements \Smile\Contact\Api\MessageRepositoryInterface
      */
     protected $dataMessageFactory;
 
-    /**
-     * @var CollectionProcessorInterface
-     */
-    private $collectionProcessor;
-
     public function __construct(
         \Smile\Contact\Model\Resource\Message $resource,
         \Smile\Contact\Model\MessageFactory $messageFactory,
         \Smile\Contact\Api\Data\MessageInterfaceFactory $dataMessageFactory,
         \Smile\Contact\Model\Resource\Message\CollectionFactory $messageCollectionFactory,
-        \Smile\Contact\Api\Data\MessageSearchResultsInterfaceFactory $searchResultsFactory,
-        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
+        \Smile\Contact\Api\Data\MessageSearchResultsInterfaceFactory $searchResultsFactory
     ) {
         $this->resource = $resource;
         $this->messageFactory = $messageFactory;
         $this->messageCollectionFactory = $messageCollectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
         $this->dataMessageFactory = $dataMessageFactory;
-        $this->collectionProcessor = $collectionProcessor;
     }
 
     public function save(\Smile\Contact\Api\Data\MessageInterface $message)

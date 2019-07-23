@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Magento\Contact\Controller\Index\Post" type="Smile\Contact\Controller\Index\Post"/>
+    <preference for="Smile\Contact\Api\Data\MessageInterface" type="Smile\Contact\Model\Message"/>
+    <preference for="Smile\Contact\Api\Data\MessageSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Smile\Contact\Api\MessageRepositoryInterface" type="Smile\Contact\Model\MessageRepository"/><!-- This nodes below to dataprovider -->
 </config>

@@ -11,11 +11,6 @@ class Post extends \Magento\Contact\Controller\Index
      */
 
     /**
-     * @var \Magento\Framework\App\Request\DataPersistorInterface
-     */
-    protected $dataPersistor;
-
-    /**
      * @var \Smile\Contact\Model\MessageFactory
      */
     private $messageFactory;
@@ -27,22 +22,25 @@ class Post extends \Magento\Contact\Controller\Index
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor
+     * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
+     * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Smile\Contact\Model\MessageFactory $messageFactory
      * @param \Smile\Contact\Model\MessageRepository $messageRepository
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
- //       \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor,
+         \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder,
+        \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Smile\Contact\Model\MessageRepository $messageRepository,
         \Smile\Contact\Model\MessageFactory $messageFactory
     ) {
- //       $this->dataPersistor = $dataPersistor;
         $this->messageRepository = $messageRepository;
         $this->messageFactory = $messageFactory;
-        parent::__construct($context, $coreRegistry);
+        parent::__construct($context, $transportBuilder, $inlineTranslation,$scopeConfig,$storeManager);
     }
 
     public function execute()
@@ -52,48 +50,6 @@ class Post extends \Magento\Contact\Controller\Index
             $this->_redirect('*/*/');
             return;
         }
- //       var_dump($data);die;
-
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
-        $resultRedirect = $this->resultRedirectFactory->create();
-//        $messageData = $data['message'];
-//        if ($messageData) {
-            $data = $this->messageFactory->create();
-//            if (array_key_exists('message_id', $data)) {
-//                $id = $messageData['message_id'];
-//                if ($id) {
-//                    try {
-//                        $messageModel = $this->messageRepository->get($id);
-//                    } catch (\Magento\Framework\Exception\LocalizedException $e) {
-//                        $this->messageManager->addErrorMessage(__('This message no longer exists.'));
-//
-//                        return $resultRedirect->setPath('*/*/');
-//                    }
-//                }
-//            }
-            $messageModel->setData($data);
-            try {
-                $this->messageRepository->save($messageModel);
-//               $this->messageManager->addSuccessMessage(__('You saved the message.'));
-  //              $this->dataPersistor->clear('contact_message');
-//                if ($this->getRequest()->getParam('back')) {
-//                    return $resultRedirect->setPath('*/*/edit', ['message_id' => $messageModel->getId()]);
-//                }
-
-                return $resultRedirect->setPath('*/*/');
-            } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\Exception $e) {
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the message.'));
-            }
-
- //           $this->dataPersistor->set('contact_message', $data);
-
-//            return $resultRedirect->setPath(
-//                '*/*/edit',
-//                ['message_id' => $this->getRequest()->getParam('message_id')]
-//            );
-
             $this->inlineTranslation->suspend();
             try {
                 $messageObject = new \Magento\Framework\DataObject();
@@ -117,8 +73,25 @@ class Post extends \Magento\Contact\Controller\Index
                     throw new \Exception();
                 }
                 $this->inlineTranslation->resume();
-                $this->messageManager->addSuccess('Message from new controller4.');
 
+                $messageModel = $this->messageFactory->create();
+
+                $messageData = array('username'=>$data['name'],
+                                    'content'=>$data['comment'],
+                                    'email'=>$data['email'],
+                                    'phone'=>$data['telephone']
+                                    );
+                $messageModel->setData($messageData);
+
+                try {
+                        $this->messageRepository->save($messageModel);
+                        $this->messageManager->addSuccess('Thanks for contacting us with your comments and questions. We\'ll respond to you very soon.');
+
+                } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                    $this->messageManager->addErrorMessage($e->getMessage());
+                } catch (\Exception $e) {
+                    $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the message.'));
+                }
 
                 $this->_redirect('contact/index');
                 return;
@@ -130,6 +103,5 @@ class Post extends \Magento\Contact\Controller\Index
                 $this->_redirect('contact/index');
                 return;
             }
-//        }
     }
 }

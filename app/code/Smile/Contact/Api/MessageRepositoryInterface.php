@@ -6,6 +6,7 @@ interface MessageRepositoryInterface
     /**
      * Save message.
      *
+     * @api
      * @param \Smile\Contact\Api\Data\MessageInterface $message
      *
      * @return \Smile\Contact\Api\Data\MessageInterface
@@ -16,6 +17,7 @@ interface MessageRepositoryInterface
     /**
      * Retrieve message.
      *
+     * @api
      * @param int $messageId
      *
      * @return \Smile\Contact\Api\Data\MessageInterface
@@ -24,6 +26,7 @@ interface MessageRepositoryInterface
     public function get($messageId);
 
     /**
+    * @api
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      *
      * @return mixed
@@ -33,6 +36,7 @@ interface MessageRepositoryInterface
     /**
      * Delete message.
      *
+     * @api
      * @param \Smile\Contact\Api\Data\MessageInterface $message
      *
      * @return bool true on success
@@ -43,11 +47,12 @@ interface MessageRepositoryInterface
     /**
      * Delete notice by ID.
      *
-     * @param int $noticeId
+     * @api
+     * @param int $messageId
      *
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function deleteById($noticeId);
+    public function deleteById($messageId);
 }
