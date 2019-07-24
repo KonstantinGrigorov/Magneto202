@@ -1,7 +1,39 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<!--  This node for overwrite original controller -->
     <preference for="Magento\Contact\Controller\Index\Post" type="Smile\Contact\Controller\Index\Post"/>
+    <!-- This nodes below to api -->
     <preference for="Smile\Contact\Api\Data\MessageInterface" type="Smile\Contact\Model\Message"/>
     <preference for="Smile\Contact\Api\Data\MessageSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-    <preference for="Smile\Contact\Api\MessageRepositoryInterface" type="Smile\Contact\Model\MessageRepository"/><!-- This nodes below to dataprovider -->
+    <preference for="Smile\Contact\Api\MessageRepositoryInterface" type="Smile\Contact\Model\MessageRepository"/>
+    <!-- This nodes below to dataprovider -->
+    <virtualType name="MessageGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Smile\Contact\Model\Resource\Message\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MessageGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <!-- This nodes below are for message grid -->
+    <virtualType name="Smile\Contact\Model\Resource\Message\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">contact_message</argument>
+            <argument name="resourceModel" xsi:type="string">Smile\Contact\Model\Resource\Message</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MessageGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- This nodes below are for collection factory -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="smile_contact_message_listing_data_source" xsi:type="string">Smile\Contact\Model\Resource\Message\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
