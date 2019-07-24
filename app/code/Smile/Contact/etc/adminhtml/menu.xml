@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Smile_contact::message" title="Contuct us messages" translate="title" module="Smile_Contact" sortOrder="30"
-             parent="Magento_Customer::customer" action="smile_contact/message" resource="Smile_Contact::message"/>
+        <add id="Smile_Contact::message" title="Contuct us messages" translate="title" module="Smile_Contact" sortOrder="30" action="smile_contact/message" resource="Smile_Contact::message"/>
     </menu>
 </config>
 

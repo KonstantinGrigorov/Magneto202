@@ -8,6 +8,12 @@ class Message extends \Magento\Framework\Model\AbstractModel implements
 {
     const MESSAGE_CACHE_TAG = 'smile_contact';
 
+     /**#@+
+     * Post's Statuses
+     */
+    const STATUS_ANSWERED = 1;
+    const STATUS_OPEN = 0;
+
     /**
      * Prefix of model events names
      *
@@ -157,10 +163,9 @@ class Message extends \Magento\Framework\Model\AbstractModel implements
     /**
      * @return array
      */
-//    public function getAvailableStatuses()
-//    {
-//        return [self::STATUS_IMPORTANT => __('important'), self::STATUS_MESSAGE => __('message'),
-//            self::STATUS_NOTIFICATION => __('notification')];
-//    }
+   public function getAvailableStatuses()
+   {
+       return [self::STATUS_ANSWERED => __('answered'), self::STATUS_OPEN => __('need to answer')];
+   }
 
 }

@@ -1,14 +1,14 @@
 <?php
-namespace Bfm\Notifications\Controller\Adminhtml;
+namespace Smile\Contact\Controller\Adminhtml;
 
-abstract class Notice extends \Magento\Backend\App\Action
+abstract class Message extends \Magento\Backend\App\Action
 {
     /**
      * Authorization level of a basic admin session
      *
      * @see _isAllowed()
      */
-    const NOTICE_ADMIN_RESOURCE = 'Bfm_Notifications::notice';
+    const MESSAGE_ADMIN_RESOURCE = 'Smile_Contact::message';
 
     /**
      * Core registry
@@ -36,8 +36,8 @@ abstract class Notice extends \Magento\Backend\App\Action
      */
     protected function initPage($resultPage)
     {
-        $resultPage->setActiveMenu('Bfm_Notifications::notice')
-            ->addBreadcrumb(__('Notification'), __('Notification'));
+        $resultPage->setActiveMenu('Smile_Contact::message')
+            ->addBreadcrumb(__('Message'), __('Mesage'));
 
         return $resultPage;
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Smile\Contact\Model\Notice;
+namespace Smile\Contact\Model\Message;
 
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {

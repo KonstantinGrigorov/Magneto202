@@ -28,6 +28,7 @@ class MessageStatus implements \Magento\Framework\Data\OptionSourceInterface
         $options[] = ['label' => '', 'value' => ''];
 
         $availableOptions = $this->message->getAvailableStatuses();
+       // var_dump($availableOptions);die;
         foreach ($availableOptions as $key => $value) {
             $options[] = [
                 'label' => $value,
