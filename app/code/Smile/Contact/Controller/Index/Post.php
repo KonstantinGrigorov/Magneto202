@@ -52,9 +52,7 @@ class Post extends \Magento\Contact\Controller\Index
         }
             $this->inlineTranslation->suspend();
             try {
-                $messageObject = new \Magento\Framework\DataObject();
-                $messageObject->setData($data);
-
+                
                 $error = false;
 
                 if (!\Zend_Validate::is(trim($data['name']), 'NotEmpty')) {
