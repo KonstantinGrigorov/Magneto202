@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Retail_Contact::message" title="Contact us messages" translate="title" module="Retail_Contact" sortOrder="30" action="retail_contact/message" resource="Retail_Contact::message"/>
+    </menu>
+</config>
+
