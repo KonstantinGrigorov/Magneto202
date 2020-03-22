@@ -50,7 +50,6 @@ class Edit extends \Retail\Contact\Controller\Adminhtml\Message
 
         // 2. Initial checking
         if ($id) {
-
             $messageModel = $this->messageRepository->get($id);
             if (!$messageModel->getId()) {
                 $this->messageManager->addError(__('This message no longer exists.'));
@@ -66,8 +65,8 @@ class Edit extends \Retail\Contact\Controller\Adminhtml\Message
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $this->initPage($resultPage)->addBreadcrumb(
-            $id ? __('Edit message') : __('New message'),
-            $id ? __('Edit message') : __('New message')
+            $id ? __('Edit message') : __(''),
+            $id ? __('Edit message') : __('')
         );
         $resultPage->getConfig()->getTitle()->prepend(__('Message'));
         if (isset($messageModel)) {

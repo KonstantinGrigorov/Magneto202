@@ -61,6 +61,7 @@
                     <item name="label" xsi:type="string">UserName</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
+                     <item name="formElement" xsi:type="string">input</item>
                 </item>
             </argument>
         </field>
@@ -71,6 +72,7 @@
                     <item name="label" xsi:type="string">Email</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
+                     <item name="formElement" xsi:type="string">input</item>
                 </item>
             </argument>
         </field>
@@ -81,6 +83,7 @@
                     <item name="label" xsi:type="string">Phone</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
+                     <item name="formElement" xsi:type="string">input</item>
                 </item>
             </argument>
         </field>
@@ -91,6 +94,7 @@
                     <item name="label" xsi:type="string">Content</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
+                     <item name="formElement" xsi:type="string">input</item>
                 </item>
             </argument>
         </field>
@@ -101,30 +105,21 @@
                     <item name="label" xsi:type="string">Retail message</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
+                     <item name="formElement" xsi:type="string">input</item>
                 </item>
             </argument>
         </field>
         <!-- This field has ucontent information -->
-        <field name="status" formElement="select">
+        <field name="status">
             <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Retail\Contact\Model\Message\Source\MessageStatus</item>
                 <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Status</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                     <item name="formElement" xsi:type="string">select</item>
                 </item>
             </argument>
-            <!-- <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>text</dataType>
-                <label translate="true">Status</label>
-                <dataScope>status</dataScope>
-            </settings> -->
-            <!-- <formElements>
-                <select>
-                    <settings>
-                        <options class="Retail\Contact\Model\Message\Source\MessageStatus"/>
-                    </settings>
-                </select>
-            </formElements> -->
         </field>
     </fieldset>
 </form>

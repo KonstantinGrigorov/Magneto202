@@ -28,8 +28,8 @@ class Save extends \Retail\Contact\Controller\Adminhtml\Message
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry,
-        \Retail\Contact\Model\NoticeRepository $messageRepository,
-        \Retail\Contact\Model\NoticeFactory $messageFactory
+        \Retail\Contact\Model\MessageRepository $messageRepository,
+        \Retail\Contact\Model\MessageFactory $messageFactory
     ) {
         $this->messageRepository = $messageRepository;
         $this->messageFactory = $messageFactory;
@@ -57,7 +57,7 @@ class Save extends \Retail\Contact\Controller\Adminhtml\Message
                     try {
                         $messageModel = $this->messageRepository->get($id);
                     } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                        $this->messageManager->addErrorMessage(__('This notice no longer exists.'));
+                        $this->messageManager->addErrorMessage(__('This message no longer exists.'));
 
                         return $resultRedirect->setPath('*/*/');
                     }
@@ -75,7 +75,7 @@ class Save extends \Retail\Contact\Controller\Adminhtml\Message
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the notice.'));
+                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the message.'));
             }
 
             return $resultRedirect->setPath(
