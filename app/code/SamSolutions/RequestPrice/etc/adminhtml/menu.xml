@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="SamSolutions_RequestPrice::request" title="Price Requests" module="SamSolutions_RequestPrice" sortOrder="30"
+             parent="Magento_Customer::customer" action="samsolutions_requestprice/request/" resource="SamSolutions_RequestPrice::request"/>
+    </menu>
+</config>
+

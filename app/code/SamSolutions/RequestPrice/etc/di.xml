@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- This nodes below to api -->
+    <preference for="SamSolutions\RequestPrice\Api\Data\RequestInterface" type="SamSolutions\RequestPrice\Model\Request"/>
+    <preference for="SamSolutions\RequestPrice\Api\Data\RequestSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="SamSolutions\RequestPrice\Api\RequestRepositoryInterface" type="SamSolutions\RequestPrice\Model\RequestRepository"/>
+    <!-- This nodes below to dataprovider -->
+    <virtualType name="RequestGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">SamSolutions\RequestPrice\Model\Resource\Request\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">RequestGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <!-- This nodes below are for request grid -->
+    <virtualType name="SamSolutions\RequestPrice\Model\Resource\Request\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">samsolutions_requestprice</argument>
+            <argument name="resourceModel" xsi:type="string">SamSolutions\RequestPrice\Model\Resource\Request</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="RequestGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- This nodes below are for collection factory -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="samsolutions_requestprice_request_listing_data_source" xsi:type="string">SamSolutions\RequestPrice\Model\Resource\Request\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

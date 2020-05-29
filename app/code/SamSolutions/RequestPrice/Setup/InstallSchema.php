@@ -46,7 +46,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     'nullable' => false,
                     'default' => '0',
                 ],
-                'Message status'
+                'Request status'
             )
             ->addColumn(
                 'name',
