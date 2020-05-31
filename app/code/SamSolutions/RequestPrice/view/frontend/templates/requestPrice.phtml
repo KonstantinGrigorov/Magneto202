@@ -1,8 +1,91 @@
-<div class="price-box price-final_price">
+<div class="price-box price-final_price" >
     <button type="button"
+            id="request-price-popup-modal"
             title="<?= /* @escapeNotVerified */ __('Request Price!') ?>"
-            class="action primary paywith"
-            id="product-paywith-button">
+            class="action request price">
         <span><?= /* @escapeNotVerified */ __('Request Price!') ?></span>
     </button>
 </div>
+<div id="request-price-form" style="display:none;">
+    <form class="form request price"
+          action="<?php /* @escapeNotVerified */ echo $block->getFormAction(); ?>"
+          id="request-price-form"
+          method="post"
+          data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>"
+          data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset">
+            <div class="field note no-label"><?php /* @escapeNotVerified */ echo __('Jot us a request price and we’ll get back to you as quickly as possible.') ?></div>
+            <div class="field name required">
+                <label class="label" for="name"><span><?php /* @escapeNotVerified */ echo __('Name') ?></span></label>
+                <div class="control">
+                    <input name="name" id="name" title="<?php /* @escapeNotVerified */ echo __('Name') ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                </div>
+            </div>
+            <div class="field email required">
+                <label class="label" for="email"><span><?php /* @escapeNotVerified */ echo __('Email') ?></span></label>
+                <div class="control">
+                    <input name="email" id="email" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+            </div>
+            <div class="field comment">
+                <label class="label" for="comment"><span><?php /* @escapeNotVerified */ echo __('What’s on your mind?') ?></span></label>
+                <div class="control">
+                    <textarea name="comment" id="comment" title="<?php /* @escapeNotVerified */ echo __('What’s on your mind?') ?>" class="input-text" cols="5" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="field request sku">
+                <div class="control">
+                    <input type="hidden" name="request_sku" id="request_sku" value="<?php echo $block->getProduct()->getSku() ?>" class="input-text" type="text"/>
+                </div>
+            </div>
+        </fieldset>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>" class="action submit primary">
+                    <span><?php /* @escapeNotVerified */ echo __('Submit') ?></span>
+                </button>
+            </div>
+        </div>
+</div>
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '',
+                buttons: [{
+                    text: $.mage.__('Close'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+            var name = $("input[name='name']").val();
+            var email = $("input[name='email']").val();
+            var comment = $("input[name='comment']").val();
+            var request_sku = $("input[name='request_sku']").val();
+            var url = "<?php echo $block->getUrl('requestprice/ajax/save') ?>";
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                dataType: 'json',
+                data: {name:name, email:email, comment:comment, request_sku:request_sku},
+            });
+            var popup = modal(options, $('#request-price-form'));
+            $("#request-price-popup-modal").on('click',function(){
+                $("#request-price-form").modal("openModal");
+            });
+
+        }
+    );
+</script>
