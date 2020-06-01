@@ -24,9 +24,9 @@ class Save extends \Magento\Framework\App\Action\Action
         $request = $this->request->create();
         $request->setData($data);
         if ($request->save()) {
-            $this->messageManager->addSuccessMessage(__('You saved review'));
+            $this->messageManager->addSuccessMessage(__('You send your request!'));
         } else {
-            $this->messageManager->addErrorMessage(__('Review was not saved.'));
+            $this->messageManager->addErrorMessage(__('There was an error during price requesting.'));
         }
         $result->setData(['success' => true]);
         return $result;
